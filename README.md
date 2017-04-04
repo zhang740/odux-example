@@ -1,6 +1,6 @@
 # odux-example
 
-odux's example - Todolist.
+odux's example - Todolist. [https://zhang740.github.io/odux-example/](https://zhang740.github.io/odux-example/)
 
 ## Directory Structure
 - assets
