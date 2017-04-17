@@ -26394,6 +26394,23 @@ function storeRegister(iocContext = power_di_1.IocContext.DefaultInstance) {
     };
 }
 exports.storeRegister = storeRegister;
+exports.bindProperty = (bindKey, inital) => (target, key) => {
+    const property = bindKey || key;
+    Object.defineProperty(target, key, {
+        get: function () {
+            let result = this.Data[property];
+            if (!result && inital !== undefined) {
+                this.Adapter.directWriteChange(() => {
+                    result = this.Data[property] = inital;
+                });
+            }
+            return result;
+        },
+        set: function (value) {
+            this.Data[property] = value;
+        }
+    });
+};
 class BaseStore {
     constructor(storeAdapter) {
         this.storeAdapter = storeAdapter;
@@ -26893,21 +26910,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const odux_1 = __webpack_require__(57);
 const decorators_1 = __webpack_require__(50);
 let PageStore = class PageStore extends odux_1.BaseStore {
-    get Todos() {
-        if (!this.Data.todos) {
-            this.Adapter.directWriteChange(() => {
-                this.Data.todos = {
-                    list: []
-                };
-            });
-        }
-        return this.Data.todos;
-    }
 };
+__decorate([
+    odux_1.bindProperty('todos', { list: [] }),
+    __metadata("design:type", Object)
+], PageStore.prototype, "Todos", void 0);
 PageStore = __decorate([
     decorators_1.registerStore()
 ], PageStore);

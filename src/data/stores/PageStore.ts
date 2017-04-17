@@ -1,4 +1,4 @@
-import { BaseStore } from 'odux'
+import { BaseStore, bindProperty } from 'odux'
 import { registerStore } from '../decorators'
 
 interface PageStoreType {
@@ -6,14 +6,15 @@ interface PageStoreType {
 }
 @registerStore()
 export class PageStore extends BaseStore<PageStoreType> {
-    get Todos() {
-        if (!this.Data.todos) {
-            this.Adapter.directWriteChange(() => {
-                this.Data.todos = {
-                    list: []
-                }
-            })
-        }
-        return this.Data.todos
-    }
+
+    @bindProperty('todos', { list: [] })
+    Todos: Models.TodoList
+
+    // also only, can not defined in PageStoreType
+    // @bindProperty()
+    // Todos: Models.TodoList
+
+    // for initialize
+    // @bindProperty('Todos', { list: [] })
+    // Todos: Models.TodoList
 }
