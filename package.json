@@ -14,7 +14,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "director": "^1.2.8",
-    "odux": "0.0.4",
+    "odux": "0.0.5",
     "power-di": "^1.0.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -22,7 +22,8 @@
     "redux": "^3.6.0",
     "redux-persist": "^4.5.0",
     "todomvc-app-css": "2.0.0",
-    "todomvc-common": "1.0.1"
+    "todomvc-common": "1.0.1",
+    "typescript": "^2.3.2"
   },
   "devDependencies": {
     "@types/react": "^15.0.20",
@@ -44,7 +45,6 @@
     "style-loader": "^0.15.0",
     "ts-loader": "^2.0.3",
     "tslint": "^4.5.1",
-    "typescript": "^2.2.2",
     "typings": "^2.1.0",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2",

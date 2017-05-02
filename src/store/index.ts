@@ -1,17 +1,14 @@
 import { IocContext } from 'power-di'
-import { BaseStore, ReduxStoreAdapter } from 'odux'
+import { Odux, BaseStore, BaseAction } from 'odux'
 import { createStore, applyMiddleware, compose, Store } from 'redux'
 import { persistStore, autoRehydrate } from 'redux-persist'
+import '../data/stores'
 
-export function storeInit(first = true, ioc = IocContext.DefaultInstance): Store<any> {
-    const adapter = ioc.get<ReduxStoreAdapter>(ReduxStoreAdapter)
-    if (!adapter) {
-        if (!first) {
-            throw new Error('storeInit fail.')
-        }
-        ioc.register(ReduxStoreAdapter)
-        return storeInit(false)
-    }
+export function storeInit(ioc = IocContext.DefaultInstance): Store<any> {
+    const adapter = ioc.get<Odux>(Odux) || new Odux(undefined, { isDebug: true })
+
+    BaseAction.GlobalAdapters.push(adapter)
+
     const storeTypes = ioc.getSubClasses<typeof BaseStore>(BaseStore)
     storeTypes.forEach(storeType => {
         ioc.replace(storeType, new storeType(adapter))

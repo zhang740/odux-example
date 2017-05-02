@@ -20,7 +20,7 @@ export class TodoActions extends BaseAction {
                 id: todo.id,
             })
             this.todoStore.Data[todo.id] = todo
-        }, [this.pageStore, this.todoStore])
+        })
     }
 
     public updateTodo(newTodo: Models.Todo) {
@@ -30,7 +30,7 @@ export class TodoActions extends BaseAction {
                 this.todoStore.Data[newTodo.id],
                 newTodo,
             )
-        }, [this.todoStore])
+        })
     }
 
     public removeTodo(id: string) {
@@ -39,7 +39,7 @@ export class TodoActions extends BaseAction {
             delete this.todoStore.Data[id]
             const index = this.pageStore.Todos.list.findIndex(t => t.id === tid)
             index >= 0 && this.pageStore.Todos.list.splice(index, 1)
-        }, [this.pageStore, this.todoStore])
+        })
     }
 
     public toggleAll(checked: boolean) {
@@ -47,7 +47,7 @@ export class TodoActions extends BaseAction {
             this.pageStore.Todos.list.forEach(item => {
                 this.todoStore.Data[item.id].completed = checked
             })
-        }, [this.todoStore])
+        })
     }
 
     public clearCompleted() {
@@ -55,6 +55,6 @@ export class TodoActions extends BaseAction {
             this.pageStore.Data.todos.list = this.pageStore.Todos.list.filter(t => {
                 return !this.todoStore.Data[t.id].completed
             })
-        }, [this.pageStore])
+        })
     }
 }
