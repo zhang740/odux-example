@@ -20,7 +20,7 @@ module.exports = {
         ]
     },
     output: {
-        path: path.join(__dirname, '/dist'),
+        path: path.join(__dirname, '/docs'),
         filename: 'assets/js/[name].bundle.js',
         publicPath: './'
     },
@@ -28,7 +28,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
     plugins: [
-        new CleanWebpackPlugin([path.join(__dirname, '/dist')], {
+        new CleanWebpackPlugin([path.join(__dirname, '/docs')], {
             root: path.resolve(__dirname, '../'),
             verbose: true,
             dry: false
