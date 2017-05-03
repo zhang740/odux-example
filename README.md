@@ -101,7 +101,7 @@ export class TodoActions extends BaseAction {
                 this.todoStore.Data[newTodo.id],
                 newTodo,
             )
-        }, [this.todoStore])
+        })
     }
 
     ...
@@ -147,7 +147,7 @@ export class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
 ```
 
 ## Some use to library
-### odux
+### [odux](https://github.com/zhang740/odux)
 An attempt to observable redux.
 
 ### [power-di](https://github.com/zhang740/power-di)
