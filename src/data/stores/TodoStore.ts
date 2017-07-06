@@ -1,5 +1,5 @@
 import { BaseStore } from 'odux'
-import { registerStore } from '../decorators'
+import { registerStore } from 'odux/simple'
 
 interface TodoStoreType {
     [id: string]: Models.Todo

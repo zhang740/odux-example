@@ -12,7 +12,7 @@ import { Router } from 'director/build/director'
 
 import { PageStore, TodoStore } from '../data/stores'
 import { TodoActions } from '../data/actions'
-import { connect, lazyInject } from '../data/decorators'
+import { connect, lazyInject } from 'odux/simple'
 
 interface AppProps {
   todos?: Models.TodoList

@@ -3,7 +3,7 @@ import { Utils } from '../../data/utils'
 import * as classNames from 'classnames'
 import { PageStore, TodoStore } from '../../data/stores'
 import { TodoActions } from '../../data/actions'
-import { connect, lazyInject } from '../../data/decorators'
+import { connect, lazyInject } from 'odux/simple'
 
 interface ITodoFooterProps {
   activeCount?: number

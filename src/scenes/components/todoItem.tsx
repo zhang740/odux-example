@@ -5,8 +5,7 @@ import * as classNames from 'classnames'
 import { ENTER_KEY, ESCAPE_KEY } from '../../data/models/constants'
 import { TodoStore } from '../../data/stores'
 import { TodoActions } from '../../data/actions'
-import { lazyInject } from '../../data/decorators'
-import { connect } from '../../data/decorators'
+import { connect, lazyInject } from 'odux/simple'
 
 interface TodoItemProps {
   id: string

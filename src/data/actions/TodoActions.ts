@@ -1,5 +1,5 @@
 import { BaseAction } from 'odux'
-import { lazyInject, register } from '../decorators'
+import { lazyInject, register } from 'odux/simple'
 import { TodoStore, PageStore } from '../stores'
 import { Utils } from '../utils'
 

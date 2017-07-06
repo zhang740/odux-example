@@ -15,7 +15,9 @@
         "suppressImplicitAnyIndexErrors": true,
         "rootDir": "src",
         "outDir": "dist",
-        "sourceMap": true
+        "sourceMap": true,
+        "allowUnusedLabels": true,
+        "allowUnreachableCode": true
     },
     "filesGlob": [
         "typings/**/*.d.ts",

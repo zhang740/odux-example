@@ -26,7 +26,8 @@
     "typescript": "^2.3.2"
   },
   "devDependencies": {
-    "@types/react": "^15.0.20",
+    "@types/react": "^15.0.34",
+    "@types/react-dom": "^15.5.1",
     "@types/classnames": "^0.0.32",
     "@types/redux-persist": "^4.3.1",
     "autoprefixer": "^6.7.7",

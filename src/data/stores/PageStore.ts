@@ -1,5 +1,5 @@
 import { BaseStore, bindProperty } from 'odux'
-import { registerStore } from '../decorators'
+import { registerStore } from 'odux/simple'
 
 interface PageStoreType {
     todos: Models.TodoList
@@ -7,14 +7,14 @@ interface PageStoreType {
 @registerStore()
 export class PageStore extends BaseStore<PageStoreType> {
 
-    @bindProperty('todos', { list: [] })
+    @bindProperty('todos', () => ({ list: [] }))
     Todos: Models.TodoList
 
-    // also only, can not defined in PageStoreType
+    // also only, not must defined in PageStoreType
     // @bindProperty()
     // Todos: Models.TodoList
 
     // for initialize
-    // @bindProperty('Todos', { list: [] })
+    // @bindProperty('Todos', () => ({ list: [] }))
     // Todos: Models.TodoList
 }
