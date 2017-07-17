@@ -14,8 +14,8 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "director": "^1.2.8",
-    "odux": "0.0.5",
-    "power-di": "^1.0.7",
+    "odux": "0.0.8",
+    "power-di": "^1.0.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
