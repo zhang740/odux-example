@@ -1,10 +1,9 @@
-import { BaseStore } from 'odux'
-import { registerStore } from 'odux/simple'
+import { BaseStore, helper } from 'odux'
 
 interface TodoStoreType {
     [id: string]: Models.Todo
 }
-@registerStore()
+@helper.registerStore()
 export class TodoStore extends BaseStore<TodoStoreType> {
 
 }

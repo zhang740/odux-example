@@ -23,127 +23,78 @@ open browser: [http://localhost:8052](http://localhost:8052)
 
 ## Quickview
 
-### Model
-```ts
-// src/data/models/base.d.ts
-declare namespace Models {
-  interface Todo {
-    id: string
-    completed?: boolean
-    title?: string
-  }
+### Component
+```tsx
+import * as React from 'react';
+import { helper } from 'odux';
 
-  type TodoStatus = 'all' | 'active' | 'completed'
+export interface PropsType { }
 
-  interface TodoList {
-    list: {
-      id: string
-    }[]
-  }
-}
+export interface StateType { }
+
+export default helper.component(
+    (ioc, ownProps: PropsType) => ({
+        todos: ioc.get<PageStore>(PageStore).Todos,
+    }),
+    (MapperType, ioc) => {
+        type MixPropsType = PropsType & typeof MapperType;
+        class ComponentName extends React.PureComponent<MixPropsType, StateType> {
+            render() {
+                const { todos } = this.props;
+                return (
+                    <div>
+                        component
+                    </div>
+                );
+            }
+        };
+        return ComponentName;
+    }
+);
 ```
 
-### Store
+### Data
 ```ts
-// src/data/stores/TodoStore.ts
-import { BaseStore } from 'odux'
-import { registerStore } from '../decorators'
-
-interface TodoStoreType {
-    [id: string]: Models.Todo
-}
-@registerStore()
-export class TodoStore extends BaseStore<TodoStoreType> {
-
-}
-
-// src/data/stores/PageStore.ts
-import { BaseStore, bindProperty } from 'odux'
-import { registerStore } from '../decorators'
+import { BaseStore, helper } from 'odux'
 
 interface PageStoreType {
-    todos: Models.TodoList
 }
-@registerStore()
+@helper.registerStore()
 export class PageStore extends BaseStore<PageStoreType> {
 
-    @bindProperty('todos', { list: [] })
+    @helper.bindProperty('todos', () => ({ list: [] }))
     Todos: Models.TodoList
-
-    // also only, can not defined in PageStoreType
-    // @bindProperty()
-    // Todos: Models.TodoList
-
-    // for initialize
-    // @bindProperty('Todos', { list: [] })
-    // Todos: Models.TodoList
 }
 ```
 
 ### Action
 ```ts
-// src/data/actions/TodoActions.ts
-import { BaseAction } from 'odux'
-import { lazyInject, register } from '../decorators'
+import { helper } from 'odux'
 import { TodoStore, PageStore } from '../stores'
-import { Utils } from '../utils'
 
-@register()
-export class TodoActions extends BaseAction {
-    @lazyInject(TodoStore)
+@helper.register()
+export class TodoActions {
+
+    @helper.inject(TodoStore)
     private todoStore: TodoStore
-    ...
 
-    public updateTodo(newTodo: Models.Todo) {
-        if (!newTodo.id) return
-        this.tracking(() => {
-            Object.assign(
-                this.todoStore.Data[newTodo.id],
-                newTodo,
-            )
+    @helper.inject(PageStore)
+    private pageStore: PageStore
+
+    @helper.tracking()
+    public addTodo(title?: string) {
+        const todo: Models.Todo = {
+            id: Utils.uuid(),
+            title,
+        }
+        this.pageStore.Todos.list.push({
+            id: todo.id,
         })
+        this.todoStore.Data[todo.id] = todo
     }
-
     ...
 }
-```
 
-### Use in components
-```ts
-// src/scenes/components/todoItem.ts
-import * as React from 'react'
-import * as ReactDom from 'react-dom'
-import * as classNames from 'classnames'
-
-import { ENTER_KEY, ESCAPE_KEY } from '../../data/models/constants'
-import { TodoStore } from '../../data/stores'
-import { TodoActions } from '../../data/actions'
-import { lazyInject } from '../../data/decorators'
-import { connect } from '../../data/decorators'
-
-interface TodoItemProps {
-  id: string
-  data?: Models.Todo
-  onDestroy: () => void
-}
-interface TodoItemState {
-  editing?: boolean
-  editText?: string
-}
-@connect<TodoItemProps>((ioc) => (props) => {
-  return {
-    ...props,
-    data: ioc.get<TodoStore>(TodoStore).Data[props.id]
-  }
-})
-export class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
-
-  @lazyInject(TodoActions)
-  private todoActions: TodoActions
-  
-  ...
-
-}
 ```
 
 ## Some use to library

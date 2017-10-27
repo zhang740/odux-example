@@ -1,13 +1,12 @@
-import { BaseStore, bindProperty } from 'odux'
-import { registerStore } from 'odux/simple'
+import { BaseStore, helper } from 'odux'
 
 interface PageStoreType {
-    todos: Models.TodoList
+    // todos: Models.TodoList
 }
-@registerStore()
+@helper.registerStore()
 export class PageStore extends BaseStore<PageStoreType> {
 
-    @bindProperty('todos', () => ({ list: [] }))
+    @helper.bindProperty('todos', () => ({ list: [] }))
     Todos: Models.TodoList
 
     // also only, not must defined in PageStoreType

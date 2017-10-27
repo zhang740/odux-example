@@ -12,12 +12,11 @@ module.exports = {
             "classnames",
             "react",
             "react-dom",
-            "react-redux",
             "director",
             "redux",
             // "todomvc-app-css",
             // "todomvc-common"
-        ]
+        ],
     },
     output: {
         path: path.join(__dirname, '/docs'),
@@ -50,7 +49,7 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loaders: ['react-hot-loader', 'ts-loader']
+                loaders: ['ts-loader'] //'react-hot-loader', 
             },
             {
                 test: /\.scss/,
