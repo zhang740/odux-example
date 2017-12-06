@@ -30,7 +30,7 @@ export default helper.component(
         type MixPropsType = PropsType & typeof MapperType
         class TodoApp extends React.PureComponent<MixPropsType, StateType> {
 
-            @helper.inject(TodoActions)
+            @helper.inject()
             private todoActions: TodoActions
 
             constructor(props: MixPropsType) {

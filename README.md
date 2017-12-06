@@ -75,10 +75,10 @@ import { TodoStore, PageStore } from '../stores'
 @helper.register()
 export class TodoActions {
 
-    @helper.inject(TodoStore)
+    @helper.inject()
     private todoStore: TodoStore
 
-    @helper.inject(PageStore)
+    @helper.inject()
     private pageStore: PageStore
 
     @helper.tracking()
