@@ -49,7 +49,7 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loaders: ['ts-loader'] //'react-hot-loader', 
+                loaders: ['babel-loader', 'ts-loader'] //'react-hot-loader', 
             },
             {
                 test: /\.scss/,
